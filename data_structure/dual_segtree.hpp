@@ -1,4 +1,4 @@
-//github link:
+//github link: https://github.com/usausamikann/usausamikann-library
 //dual_segtree:区間変更・一点取得に対応
 //verified with: https://atcoder.jp/contests/abc477/submissions/79599130
 template<typename S, typename F, auto mapping, auto composition, auto id>
