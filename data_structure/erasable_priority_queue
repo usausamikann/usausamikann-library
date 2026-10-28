@@ -1,6 +1,8 @@
 //以下、昇順管理・降順管理の削除可能priority_queueを載せています　用途ごとにお使いください
 
-//verified with:
+//github link: https://github.com/usausamikann/usausamikann-library
+//erasable_maxpq:降順管理priority_queue+削除操作
+//verified with: https://judge.yosupo.jp/submission/413694
 template<typename T>
 struct erasable_maxpq{
     private:
@@ -36,6 +38,9 @@ struct erasable_maxpq{
     }
 };
 
+//github link: https://github.com/usausamikann/usausamikann-library
+//erasable_minpq:昇順管理priority_queue+削除操作
+//verified with: https://judge.yosupo.jp/submission/413694
 template<typename T>
 struct erasable_minpq{
     private:
