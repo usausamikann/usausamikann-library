@@ -1,0 +1,93 @@
+struct treeinfo{
+    private:
+    vector<vector<int>> g; //木
+    int n; //木のサイズ
+    bool fg_cul_dist;
+    void dp_dist(int v, int p, vector<int>& dist){
+        for(int nv : g[v]){
+            if(nv==p) continue;
+            dist[nv]=dist[v]+1;
+            dp_dist(nv,v,dist);
+        }
+    }
+    int far_ver(const vector<int>& dist){
+        int res=-1;
+        int d=-1;
+        for(int v=0; v<(int)dist.size(); v++){
+            if(d<dist[v]){
+                d=dist[v];
+                res=v;
+            }
+        }
+        return res;
+    }
+    int dia; //直径
+    pair<int,int> center; //中心
+    vector<int> path; //直径のパス
+    vector<int> d_left,d_right; //直径の両端からの距離テーブル
+    bool make_path(int v, int p, int left, int right){
+        bool fg=false;
+        for(int nv : g[v]){
+            if(nv==p) continue;
+            fg|=make_path(nv,v,left,right);
+        }
+        if(fg || v==left || v==right){
+            path.push_back(v);
+            return true;
+        }
+        else return false;
+    }
+    void cul_dist(){
+        vector<int> d0(n,0);
+        dp_dist(0,-1,d0);
+        //path始点
+        int left=far_ver(d0);
+        d_left.resize(n,0); dp_dist(left,-1,d_left);
+        //path終点
+        int right=far_ver(d_left);
+        d_right.resize(n,0); dp_dist(right,-1,d_right);
+        //直径
+        dia=d_left[right];
+        //path構築
+        make_path(right,-1,left,right); //path={left,...,right}となるはず
+        if((int)path.size()%2==1){
+            center={path[(int)path.size()/2],-1};
+        }
+        else{
+            center={path[(int)path.size()/2-1],path[(int)path.size()/2]};
+        }
+    }
+    void ini_dist(){
+        if(!fg_cul_dist){
+            cul_dist();
+            fg_cul_dist=true;
+        }
+    }
+    public:
+    //コンストラクタ, 木を渡す
+    treeinfo(const vector<vector<int>>& _g){
+        g=_g;
+        n=g.size();
+        fg_cul_dist=false;
+    }
+    //直径
+    int get_dia(){
+        ini_dist(); return dia;
+    }
+    //直径のパス,端点を得るのにも使える
+    vector<int> get_path(){
+        ini_dist(); return path;
+    }
+    //中心,1つしかない場合は{中心のid,-1}を返す
+    pair<int,int> get_center(){
+        ini_dist(); return center;
+    }
+    //離心率,vから{最も遠い頂点との距離,最も遠い頂点のindex}を返す
+    pair<int,int> get_far_info(int v){
+        ini_dist();
+        int left=path[0]; int right=path.back();
+        pair<int,int> resl={d_left[v],left};
+        pair<int,int> resr={d_right[v],right};
+        return max(resl,resr);
+    }
+};
