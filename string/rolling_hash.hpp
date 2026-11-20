@@ -1,12 +1,3 @@
-#pragma once
-
-#include <atcoder/modint>
-#include <cassert>
-#include <random>
-#include <string>
-#include <utility>
-#include <vector>
-
 // Rolling Hash (double mod). Requires AtCoder Library (ACL), C++17 or later.
 // Different rhash instances share the same randomized bases and power tables.
 struct rhash {
