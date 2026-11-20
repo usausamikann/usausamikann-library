@@ -1,5 +1,6 @@
-// Rolling Hash (double mod). Requires AtCoder Library (ACL), C++17 or later.
-// Different rhash instances share the same randomized bases and power tables.
+//github link: https://github.com/usausamikann/usausamikann-library
+//rolling hash(modの法を998244353と10^9+7の両方で取っているのでそこそこ安全なはず)
+//verified with: https://atcoder.jp/contests/abc284/submissions/74206612
 struct rhash {
 private:
     using m1 = atcoder::modint998244353;
@@ -16,6 +17,7 @@ private:
     int n;
 
 public:
+    //コンストラクタ
     explicit rhash(const std::string& s) : n(static_cast<int>(s.size())) {
         if (base1.val() == 0) {
             std::random_device rd;
@@ -42,7 +44,7 @@ public:
         }
     }
 
-    // Hash of s[l:r] (half-open range). O(1).
+    //ハッシュ計算, 文字列subs=s[l],...,s[r-1]のハッシュを求める
     phash get(int l, int r) const {
         assert(0 <= l && l <= r && r <= n);
         return {
