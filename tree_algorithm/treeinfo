@@ -1,3 +1,6 @@
+//github link: https://github.com/usausamikann/usausamikann-library
+//treeinfo:直径まわりのあれこれを計算
+//verified with: (not yet)
 struct treeinfo{
     private:
     vector<vector<int>> g; //木
