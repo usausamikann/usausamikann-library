@@ -1,4 +1,6 @@
-
+//github link: https://github.com/usausamikann/usausamikann-library
+//trie木、機能は控えめ
+//verified with: https://atcoder.jp/contests/abc403/submissions/81075097
 template<typename T>
 struct trie{
     private:
