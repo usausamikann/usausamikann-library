@@ -1,4 +1,6 @@
-
+//github link: https://github.com/usausamikann/usausamikann-library
+//sweep_2d:**静的な**2次元平面上の点（重み）追加・矩形領域内の総重量取得
+//verified with: https://judge.yosupo.jp/submission/420130, https://atcoder.jp/contests/abc405/submissions/81112449
 struct sweep_2d{
     private:
     using ll=long long;
